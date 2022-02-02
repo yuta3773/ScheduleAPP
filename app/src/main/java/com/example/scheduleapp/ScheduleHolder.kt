@@ -7,5 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 //一行分のレイアウトを保持しておくクラス
 class ScheduleHolder(item: View) : RecyclerView.ViewHolder(item) {
     //scheduleListはスケジュール
-    val scheduleList: TextView = item.findViewById(R.id.text)
+    val titleList: TextView = item.findViewById(R.id.title_text)
+    val deadlineList: TextView = item.findViewById(R.id.deadline_text)
+
 }
