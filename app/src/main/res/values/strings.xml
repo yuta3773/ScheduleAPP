@@ -1,9 +1,14 @@
 <resources>
+<!--  test  -->
     <string name="app_name">ScheduleApp</string>
-    <string name="title">タイトル</string>
-    <string name="deadline">期日</string>
     <string name="test3">テスト３</string>
     <string name="test4">テスト４</string>
     <string name="test5">テスト５</string>
+<!--  main  -->
+    <string name="title">タイトル</string>
+    <string name="deadline">期日</string>
+    <string name="edit_text">追加</string>
+
+
 
 </resources>

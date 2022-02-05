@@ -1,5 +1,6 @@
 package com.example.scheduleapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_list)
         recyclerView.adapter = ScheduleAdapter(taskList)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.nextEditButton.setOnClickListener {
+            intent = Intent(this, ScheduleEditActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
