@@ -9,6 +9,7 @@
     <string name="deadline">期日</string>
     <string name="edit_text">追加</string>
 
-
+<!--  edit  -->
+    <string name="save_text">保存</string>
 
 </resources>

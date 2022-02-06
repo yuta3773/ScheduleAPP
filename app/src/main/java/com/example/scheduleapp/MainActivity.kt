@@ -11,22 +11,27 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var recyclerView: RecyclerView
-
-    private val taskList: List<Task> = listOf(Task("スケジュール1", "2022/2/20"), Task("スケジュール2", "2022/2/21"))
+    private var taskList: MutableList<Task> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerView = findViewById(R.id.recycler_list)
-        recyclerView.adapter = ScheduleAdapter(taskList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        //ScheduleEditActivityからTaskモデルを受け取り
+        val newTask = intent.getParcelableExtra<Task>("EDIT_DATE")
+        //nullチェック
+        if (newTask != null) {
+            //TaskモデルをList<Task>にしインスタンス化
+            taskList.add(newTask)
+            recyclerView = findViewById(R.id.recycler_list)
+            recyclerView.adapter = ScheduleAdapter(taskList)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+        }
 
         binding.nextEditButton.setOnClickListener {
             intent = Intent(this, ScheduleEditActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
