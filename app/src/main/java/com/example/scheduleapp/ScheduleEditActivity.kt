@@ -1,6 +1,6 @@
 package com.example.scheduleapp
 
-import android.content.Intent
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.scheduleapp.databinding.ActivityScheduleEditBinding
@@ -14,16 +14,16 @@ class ScheduleEditActivity : AppCompatActivity() {
         binding = ActivityScheduleEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         binding.saveBottom.setOnClickListener {
-            //Taskをインスタンス化
+            //入力された値を持ってTaskをインスタンス化
             val taskEdit = Task(title = binding.editTitleText.text.toString(),
                                 deadline = binding.editDeadlineText.text.toString())
-
-            //MainActivityへの遷移
-            intent = Intent(this, MainActivity::class.java)
-            //TaskモデルをMainActivityへ渡す
-            intent.putExtra("EDIT_DATE", taskEdit)
-            startActivity(intent)
+            //入力された値を元のアクティビティに返す
+            intent.putExtra("result", taskEdit)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
 }
