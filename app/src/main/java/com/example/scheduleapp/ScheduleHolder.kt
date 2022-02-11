@@ -9,5 +9,4 @@ class ScheduleHolder(item: View) : RecyclerView.ViewHolder(item) {
     //scheduleListはスケジュール
     val titleList: TextView = item.findViewById(R.id.title_text)
     val deadlineList: TextView = item.findViewById(R.id.deadline_text)
-
 }

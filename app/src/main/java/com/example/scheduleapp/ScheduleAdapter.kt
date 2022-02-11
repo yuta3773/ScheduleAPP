@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 //ScheduleHolderと紐付けるクラス。コンストラクタにListをもらい1行分のレイアウトと紐付ける。
-class ScheduleAdapter(private val list: List<Task>) : RecyclerView.Adapter<ScheduleHolder>() {
+class ScheduleAdapter(var list: List<Task>) : RecyclerView.Adapter<ScheduleHolder>() {
     //1行分のレイアウトを生成
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_line, parent, false)
@@ -16,7 +16,6 @@ class ScheduleAdapter(private val list: List<Task>) : RecyclerView.Adapter<Sched
     override fun onBindViewHolder(holder: ScheduleHolder, position: Int) {
         holder.titleList.text = list[position].title
         holder.deadlineList.text = list[position].deadline
-
     }
 
     //getItemCountは行の数をカウント

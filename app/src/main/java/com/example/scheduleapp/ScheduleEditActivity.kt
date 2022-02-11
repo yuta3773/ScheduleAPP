@@ -14,8 +14,6 @@ class ScheduleEditActivity : AppCompatActivity() {
         binding = ActivityScheduleEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         binding.saveBottom.setOnClickListener {
             //入力された値を持ってTaskをインスタンス化
             val taskEdit = Task(title = binding.editTitleText.text.toString(),
