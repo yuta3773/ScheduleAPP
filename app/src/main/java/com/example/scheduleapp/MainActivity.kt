@@ -12,40 +12,38 @@ import com.example.scheduleapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var recyclerView: RecyclerView
-    private var taskList: MutableList<Task> = mutableListOf()
+    private val taskList: MutableList<Task> = mutableListOf()
+    private var adapter: ScheduleAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val _adapter = ScheduleAdapter(taskList)
+
+        //recyclerViewの処理
+        val recyclerView: RecyclerView = binding.recyclerList
+        adapter = ScheduleAdapter(taskList)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         val launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                // Activityから受け取った結果を処理する
+                // ScheduleEditActivityから受け取った結果を処理する
                 if (result.resultCode == Activity.RESULT_OK) {
                     val intent = result.data
                     //ScheduleEditActivityからTaskモデルを受け取り
                     val task = intent?.getParcelableExtra<Task>("result")
                         ?: return@registerForActivityResult
-                    //recyclerViewの処理
-                    taskList.add(task)
-                    _adapter.list = taskList
-                    recyclerView = findViewById(R.id.recycler_list)
-                    recyclerView.adapter = _adapter
-                    _adapter.notifyDataSetChanged()
-                    recyclerView.layoutManager = LinearLayoutManager(this)
 
-//                taskList.add(task)
-//                recyclerView = findViewById(R.id.recycler_list)
-//                recyclerView.adapter = ScheduleAdapter(taskList)
-//                recyclerView.layoutManager = LinearLayoutManager(this)
+                    //RecyclerViewの更新
+                    adapter?.list?.add(task)
+                    adapter?.notifyItemChanged(taskList.lastIndex)
                 }
             }
 
         binding.nextEditButton.setOnClickListener {
             val intent = Intent(this, ScheduleEditActivity::class.java)
+            //registerForActivityResult。結果を戻す指示
             launcher.launch(intent)
         }
     }
